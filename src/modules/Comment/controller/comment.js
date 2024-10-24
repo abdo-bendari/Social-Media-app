@@ -48,21 +48,6 @@ export const updateComment = catchError(async (req, res, next) => {
     res.status(200).json({ message: "Comment updated successfully", comment });
 });
 
-// export const deleteComment = catchError(async (req, res, next) => {
-//     const { id } = req.params;
-//     const comment = await Comment.findByIdAndDelete(id);
-//     if (!comment) {
-//         return next(new AppError("Comment not found", 404));
-//     }
-//     if (comment.user.toString() !== req.user._id.toString()) {
-//         return next(new AppError("You can only delete your own comments", 403));
-//     }
-//     const post = await Post.findById(comment.post);
-//     post.comments.splice(post.comments.indexOf(comment), 1);
-//     await post.save();
-//     await comment.save();
-//     res.status(200).json({ message: "Comment deleted successfully", post });
-// });
 export const deleteComment = catchError(async (req, res, next) => {
     const { id } = req.params;
     const comment = await Comment.findById(id);

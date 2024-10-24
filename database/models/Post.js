@@ -14,9 +14,9 @@ const postSchema = new Schema(
       ref: "User",
       required: true,
     },
-    media: { 
-      type: [String], 
-      default: [], 
+    media: {
+      type: [String],
+      default: [],
     },
     comments: [
       {
@@ -37,7 +37,9 @@ const postSchema = new Schema(
 
 postSchema.post("init", function (doc) {
   if (doc.media && Array.isArray(doc.media)) {
-    doc.media = doc.media.map(file => `http://localhost:3000/uploads/posts/${file}`);
+    doc.media = doc.media.map(
+      (file) => `http://localhost:3000/uploads/posts/${file}`
+    );
   }
 });
 const Post = mongoose.model("Post", postSchema);

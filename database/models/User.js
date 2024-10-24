@@ -27,32 +27,36 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
-    followers: [{
-      type: mongoose.Schema.Types.ObjectId,
-      default : []
-    }],
-    following:[{
-      type: mongoose.Schema.Types.ObjectId,
-      default : []
-    }],
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        default: [],
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        default: [],
+      },
+    ],
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
     },
-    desc :{
+    desc: {
       type: String,
-      max : [100, "max length is 100 character"]
+      max: [100, "max length is 100 character"],
     },
-    from : String,
-    relationship : {
-    type : Number,
-    enum : [1,2,3]
+    from: String,
+    relationship: {
+      type: Number,
+      enum: [1, 2, 3],
     },
-    posts : {
-      type : [mongoose.Schema.Types.ObjectId],
-      default : [],
-      ref : "Post"
+    posts: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
+      ref: "Post",
     },
   },
   {
@@ -62,7 +66,7 @@ const userSchema = new Schema(
 );
 
 userSchema.pre("save", function () {
-  this.password = bcrypt.hashSync(this.password,8);
+  this.password = bcrypt.hashSync(this.password, 8);
 });
 
 const User = mongoose.model("User", userSchema);
